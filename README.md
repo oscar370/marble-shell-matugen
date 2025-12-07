@@ -6,7 +6,7 @@ Color your GNOME Shell with [Marble Shell](https://github.com/imarkoff/Marble-sh
 
 - Download the Marble Shell binary [here](https://github.com/oscar370/marble-shell-matugen/releases).
 - Save it wherever you prefer; I usually use `~/.local/bin/`.
-- In your Matugen template, or using Matuda, configure the prehook as follows:
+- In your Matugen template, or using [Matuda](https://github.com/oscar370/Matuda), configure the prehook as follows:
 
 ```bash
 ~/.local/bin/marble-shell -O --hue {{colors.primary.default.hue}} --sat {{colors.primary.default.saturation}} --mode dark --name matugen --filled
@@ -18,7 +18,7 @@ Color your GNOME Shell with [Marble Shell](https://github.com/imarkoff/Marble-sh
 
 > It is advisable to define the name so that a new theme is not generated each time Matugen run.
 
-> You can use a template pointing to a file that only has `{{ palettes }}`, or add the hook to a template you already have. *It will not affect your template*.
+> You can use a template pointing to a file that only has `{{ palettes }}`, or add the hook to a template you already have. _It will not affect your template_.
 
 - Now activate the theme. You have to reload the extension every time the theme is replaced. You can use the following script to automate this:
 
@@ -73,6 +73,7 @@ fi
 These instructions are for building the Marble Shell binary.
 
 ### Requirements
+
 - pyinstaller
 
 ### Python dependencies
