@@ -36,31 +36,39 @@ class ArgumentsDefiner:
                     ''')
 
     def _define_default_arguments(self):
-        self._parser.add_argument('-r', '--remove', action='store_true', help='remove Marble themes')
-        self._parser.add_argument('-ri', '--reinstall', action='store_true', help='reinstall Marble themes')
+        self._parser.add_argument(
+            '-r', '--remove', action='store_true', help='remove Marble themes')
+        self._parser.add_argument(
+            '-ri', '--reinstall', action='store_true', help='reinstall Marble themes')
 
     def _define_color_arguments(self, colors: dict[str, Any]):
         default_args = self._parser.add_argument_group('Install default theme')
-        default_args.add_argument('-a', '--all', action='store_true', help='all available accent colors')
+        default_args.add_argument(
+            '-a', '--all', action='store_true', help='all available accent colors')
 
         for color in colors:
-            default_args.add_argument(f'--{color}', action='store_true', help=f'{color} theme only')
+            default_args.add_argument(
+                f'--{color}', action='store_true', help=f'{color} theme only')
 
     def _define_custom_color_arguments(self):
-        custom_args = self._parser.add_argument_group('Install custom color theme')
-        custom_args.add_argument('--hue', type=int, choices=range(0, 361), help='generate theme from Hue prompt',
+        custom_args = self._parser.add_argument_group(
+            'Install custom color theme')
+        custom_args.add_argument('--hue', type=float, help='generate theme from Hue prompt (0–360)',
                                  metavar='(0 - 360)')
-        custom_args.add_argument('--name', nargs='?', help='theme name (optional)')
+        custom_args.add_argument(
+            '--name', nargs='?', help='theme name (optional)')
 
     def _define_theme_styles_arguments(self):
         color_styles = self._parser.add_argument_group("Theme color styles")
-        color_styles.add_argument("--filled", action="store_true", help="make accent color more vibrant")
+        color_styles.add_argument(
+            "--filled", action="store_true", help="make accent color more vibrant")
 
     def _define_color_tweaks_arguments(self):
         color_tweaks = self._parser.add_argument_group('Optional theme tweaks')
-        color_tweaks.add_argument('--mode', choices=['light', 'dark'], help='select a specific theme mode to install')
-        color_tweaks.add_argument('--sat', type=int, choices=range(0, 251),
-                                  help='custom color saturation (<100%% - reduce, >100%% - increase)',
+        color_tweaks.add_argument(
+            '--mode', choices=['light', 'dark'], help='select a specific theme mode to install')
+        color_tweaks.add_argument('--sat', type=float,
+                                  help='custom color saturation (<100% reduce, >100% increase)',
                                   metavar='(0 - 250)')
 
     def _define_gdm_arguments(self):

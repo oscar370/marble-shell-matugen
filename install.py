@@ -29,6 +29,18 @@ def main():
     colors_definer = ColorsDefiner(config.colors_json)
     args = ArgumentsDefiner(colors_definer.colors).parse()
 
+    if args.hue is not None:
+        if not (0 <= args.hue <= 360):
+            Console().Line().error("Hue must be between 0 and 360.")
+            return
+        args.hue = int(args.hue)
+
+    if args.sat is not None:
+        if not (0 <= args.sat <= 250):
+            Console().Line().error("Saturation must be between 0 and 250.")
+            return
+        args.sat = int(args.sat)
+
     installer_class = GlobalThemeInstaller if args.gdm else LocalThemeInstaller
     installer = installer_class(args, colors_definer)
 

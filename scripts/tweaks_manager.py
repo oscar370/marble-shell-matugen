@@ -2,6 +2,7 @@ import glob
 import os
 from scripts import config
 import importlib.util
+import sys
 
 
 class TweaksManager:
@@ -11,7 +12,13 @@ class TweaksManager:
     """
 
     def __init__(self):
-        self.tweak_files = glob.glob(config.tweak_file)
+        base = getattr(sys, '_MEIPASS', None) or os.path.abspath(
+            os.path.dirname(os.path.dirname(__file__)))
+        if not os.path.isabs(config.tweak_file):
+            pattern = os.path.join(base, config.tweak_file)
+        else:
+            pattern = config.tweak_file
+        self.tweak_files = glob.glob(pattern)
 
     @staticmethod
     def load_tweak(tweak_file):
@@ -24,7 +31,8 @@ class TweaksManager:
             os.chmod(tweak_file, 0o755)
 
         if os.access(tweak_file, os.X_OK):
-            spec = importlib.util.spec_from_file_location("tweak_module", tweak_file)
+            spec = importlib.util.spec_from_file_location(
+                "tweak_module", tweak_file)
             module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(module)
             return module
