@@ -20,6 +20,8 @@ Color your GNOME Shell with [Marble Shell](https://github.com/imarkoff/Marble-sh
 
 > You can use a template pointing to a file that only has `{{ palettes }}`, or add the hook to a template you already have. _It will not affect your template_.
 
+> **Functionality with GDM has not yet been tested.**
+
 - Now activate the theme. You have to reload the extension every time the theme is replaced. You can use the following script to automate this:
 
 ```bash
